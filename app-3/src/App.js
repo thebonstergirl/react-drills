@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+  constructor(){
+    super();
+    
+    this.state={
+      userInput: '',
+      arr: ["Hello", "Darkness", "My", "Old", "Friend"]
+    }
+  }
+
+inputHere = (val) =>{
+ this.setState({userInput: val})
+}
+
+    render(){
+  let wordsToDisplay = this.state.arr.filter((el, i)=>{return el.includes(this.state.userInput);}).map( (el, i)=> {return <h2 key={i}>{el}</h2>})
+      console.log(this.state)
+      return(
+        <div>
+        <input type="text" onChange={(e) => this.inputHere(e.target.value)} />
+        <span>{wordsToDisplay}</span>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
     );
   }
 }
